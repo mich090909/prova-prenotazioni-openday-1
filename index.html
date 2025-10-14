@@ -1,0 +1,367 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="it">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>Open Day Wiligelmo - Prenotazioni</title>\
+    <script src="https://cdn.tailwindcss.com"></script>\
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">\
+    <style>\
+        body \{\
+            font-family: 'Inter', sans-serif;\
+        \}\
+        .view \{\
+            display: none;\
+        \}\
+        .view.active \{\
+            display: block;\
+        \}\
+        /* Stile per lo spinner di caricamento */\
+        .loader \{\
+            border: 4px solid #f3f3f3;\
+            border-radius: 50%;\
+            border-top: 4px solid #3498db;\
+            width: 40px;\
+            height: 40px;\
+            animation: spin 1s linear infinite;\
+        \}\
+        @keyframes spin \{\
+            0% \{ transform: rotate(0deg); \}\
+            100% \{ transform: rotate(360deg); \}\
+        \}\
+    </style>\
+</head>\
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">\
+\
+    <div class="w-full max-w-lg bg-white rounded-xl shadow-lg p-8 space-y-6">\
+        \
+        <header class="text-center">\
+            <h1 class="text-3xl font-bold text-gray-800">Open Day "Wiligelmo"</h1>\
+            <p class="text-gray-500 mt-2">Piattaforma di prenotazione per le famiglie</p>\
+        </header>\
+\
+        <!-- Spinner di caricamento globale -->\
+        <div id="loading-spinner" class="hidden flex justify-center items-center">\
+            <div class="loader"></div>\
+            <p class="ml-4 text-gray-600">Caricamento in corso...</p>\
+        </div>\
+\
+        <!-- Sezione Login -->\
+        <div id="login-view" class="view active space-y-4">\
+            <h2 class="text-xl font-semibold text-gray-700">Accedi</h2>\
+            <form id="login-form">\
+                <div>\
+                    <label for="username" class="block text-sm font-medium text-gray-600">Username</label>\
+                    <input type="text" id="username" name="username" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">\
+                </div>\
+                <div>\
+                    <label for="password" class="block text-sm font-medium text-gray-600">Password</label>\
+                    <input type="password" id="password" name="password" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">\
+                </div>\
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">\
+                    Accedi\
+                </button>\
+            </form>\
+            <div class="text-center text-sm">\
+                <a href="#" id="show-register-link" class="font-medium text-indigo-600 hover:text-indigo-500">Non hai un account? Registrati</a>\
+                <span class="mx-2 text-gray-300">|</span>\
+                <a href="#" id="show-reset-link" class="font-medium text-indigo-600 hover:text-indigo-500">Password dimenticata?</a>\
+            </div>\
+        </div>\
+\
+        <!-- Sezione Registrazione -->\
+        <div id="register-view" class="view space-y-4">\
+            <h2 class="text-xl font-semibold text-gray-700">Registrati</h2>\
+            <form id="register-form">\
+                <div>\
+                    <label for="reg-nome" class="block text-sm font-medium text-gray-600">Nome del genitore</label>\
+                    <input type="text" id="reg-nome" name="nome" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">\
+                </div>\
+                <div>\
+                    <label for="reg-cognome" class="block text-sm font-medium text-gray-600">Cognome del genitore</label>\
+                    <input type="text" id="reg-cognome" name="cognome" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">\
+                </div>\
+                <div>\
+                    <label for="reg-email" class="block text-sm font-medium text-gray-600">Indirizzo Email</label>\
+                    <input type="email" id="reg-email" name="email" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">\
+                </div>\
+                <p class="text-xs text-gray-500">Riceverai username e password via email dopo la registrazione.</p>\
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">\
+                    Registrati\
+                </button>\
+            </form>\
+            <div class="text-center text-sm">\
+                <a href="#" id="show-login-link-from-register" class="font-medium text-indigo-600 hover:text-indigo-500">Hai gi\'e0 un account? Accedi</a>\
+            </div>\
+        </div>\
+        \
+        <!-- Sezione Ripristino Password -->\
+        <div id="reset-view" class="view space-y-4">\
+            <h2 class="text-xl font-semibold text-gray-700">Ripristina Password</h2>\
+            <p class="text-sm text-gray-600">Inserisci il tuo indirizzo email per ricevere una nuova password.</p>\
+            <form id="reset-form">\
+                 <div>\
+                    <label for="reset-email" class="block text-sm font-medium text-gray-600">Indirizzo Email</label>\
+                    <input type="email" id="reset-email" name="email" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">\
+                </div>\
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">\
+                    Invia richiesta\
+                </button>\
+            </form>\
+            <div class="text-center text-sm">\
+                <a href="#" id="show-login-link-from-reset" class="font-medium text-indigo-600 hover:text-indigo-500">Torna al Login</a>\
+            </div>\
+        </div>\
+\
+        <!-- Dashboard Prenotazioni (dopo il login) -->\
+        <div id="dashboard-view" class="view space-y-6">\
+            <div>\
+                <h2 class="text-xl font-semibold text-gray-700">Ciao, <span id="user-display-name"></span>!</h2>\
+                <p class="text-gray-500">Benvenuto nella tua area personale.</p>\
+            </div>\
+            \
+            <!-- La tua prenotazione -->\
+            <div id="current-booking-section" class="hidden bg-green-50 border-l-4 border-green-400 p-4 rounded-md">\
+                <h3 class="font-semibold text-green-800">La tua prenotazione</h3>\
+                <p id="booking-details" class="text-green-700 mt-1"></p>\
+                <button id="cancel-booking-btn" class="mt-3 text-sm font-medium text-red-600 hover:text-red-800">Annulla prenotazione</button>\
+            </div>\
+\
+            <!-- Sezione per prenotare -->\
+            <div id="new-booking-section" class="space-y-4">\
+                <h3 class="font-semibold text-gray-700">Seleziona un orario per la visita</h3>\
+                <div id="slots-container" class="space-y-2">\
+                    <!-- Gli slot verranno inseriti qui da JavaScript -->\
+                </div>\
+            </div>\
+             <button id="logout-btn" class="w-full mt-4 flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">\
+                Esci\
+            </button>\
+        </div>\
+        \
+        <!-- Area Notifiche -->\
+        <div id="notification" class="hidden p-4 rounded-md text-sm"></div>\
+\
+    </div>\
+\
+    <script>\
+        // IMPORTANTE: Sostituisci questa stringa con l'URL del tuo script pubblicato come Web App.\
+        const SCRIPT_URL = '';\
+\
+        // Elementi del DOM\
+        const views = document.querySelectorAll('.view');\
+        const loadingSpinner = document.getElementById('loading-spinner');\
+        const notification = document.getElementById('notification');\
+        \
+        let currentUser = null;\
+\
+        // Funzioni di navigazione\
+        function showView(viewId) \{\
+            views.forEach(view => \{\
+                view.classList.remove('active');\
+            \});\
+            document.getElementById(viewId).classList.add('active');\
+        \}\
+\
+        function showNotification(message, isError = false) \{\
+            notification.textContent = message;\
+            notification.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');\
+            if (isError) \{\
+                notification.classList.add('bg-red-100', 'text-red-800');\
+            \} else \{\
+                notification.classList.add('bg-green-100', 'text-green-800');\
+            \}\
+            // Nasconde la notifica dopo 5 secondi\
+            setTimeout(() => \{\
+                notification.classList.add('hidden');\
+            \}, 5000);\
+        \}\
+        \
+        function setLoading(isLoading) \{\
+            if (isLoading) \{\
+                loadingSpinner.classList.remove('hidden');\
+            \} else \{\
+                loadingSpinner.classList.add('hidden');\
+            \}\
+        \}\
+\
+        // --- GESTIONE API ---\
+        async function apiCall(action, payload) \{\
+            if (!SCRIPT_URL) \{\
+                showNotification("ERRORE: L'URL dello script non \'e8 stato configurato. Modifica il file index.html.", true);\
+                return;\
+            \}\
+            setLoading(true);\
+            try \{\
+                const response = await fetch(SCRIPT_URL, \{\
+                    method: 'POST',\
+                    body: JSON.stringify(\{ action, ...payload \}),\
+                    headers: \{ 'Content-Type': 'application/json' \},\
+                \});\
+                const result = await response.json();\
+\
+                if (result.status === 'success') \{\
+                    showNotification(result.message);\
+                    return result.data;\
+                \} else \{\
+                    showNotification(result.message, true);\
+                    return null;\
+                \}\
+            \} catch (error) \{\
+                console.error('API Call Error:', error);\
+                showNotification('Si \'e8 verificato un errore di comunicazione. Riprova.', true);\
+                return null;\
+            \} finally \{\
+                setLoading(false);\
+            \}\
+        \}\
+\
+        // --- LOGICA DI LOGIN E REGISTRAZIONE ---\
+        document.getElementById('login-form').addEventListener('submit', async (e) => \{\
+            e.preventDefault();\
+            const formData = new FormData(e.target);\
+            const data = await apiCall('login', Object.fromEntries(formData.entries()));\
+            if (data && data.user) \{\
+                currentUser = data.user;\
+                sessionStorage.setItem('currentUser', JSON.stringify(currentUser)); // Salva l'utente nella sessione\
+                showDashboard();\
+            \}\
+        \});\
+\
+        document.getElementById('register-form').addEventListener('submit', async (e) => \{\
+            e.preventDefault();\
+            const formData = new FormData(e.target);\
+            const data = await apiCall('register', Object.fromEntries(formData.entries()));\
+            if (data) \{\
+                e.target.reset();\
+                showNotification("Registrazione completata! Controlla la tua email per le credenziali e poi accedi.");\
+                showView('login-view');\
+            \}\
+        \});\
+        \
+        document.getElementById('reset-form').addEventListener('submit', async (e) => \{\
+            e.preventDefault();\
+            const formData = new FormData(e.target);\
+            const data = await apiCall('resetPassword', Object.fromEntries(formData.entries()));\
+             if (data) \{\
+                e.target.reset();\
+                showNotification("Se l'email \'e8 presente nel sistema, riceverai a breve una nuova password.");\
+                showView('login-view');\
+            \}\
+        \});\
+\
+        // --- LOGICA DELLA DASHBOARD ---\
+        async function showDashboard() \{\
+            if (!currentUser) return;\
+            document.getElementById('user-display-name').textContent = currentUser.nome;\
+            showView('dashboard-view');\
+            loadBookingData();\
+        \}\
+\
+        async function loadBookingData() \{\
+            const data = await apiCall('getBookings', \{ username: currentUser.username \});\
+            if (data) \{\
+                const \{ slots, userBooking \} = data;\
+                \
+                // Gestisci la prenotazione corrente\
+                const currentBookingSection = document.getElementById('current-booking-section');\
+                const newBookingSection = document.getElementById('new-booking-section');\
+                \
+                if (userBooking) \{\
+                    document.getElementById('booking-details').textContent = `Hai prenotato per il giorno $\{userBooking.data\} alle ore $\{userBooking.orario\}.`;\
+                    currentBookingSection.classList.remove('hidden');\
+                    newBookingSection.classList.add('hidden');\
+                \} else \{\
+                    currentBookingSection.classList.add('hidden');\
+                    newBookingSection.classList.remove('hidden');\
+                    renderSlots(slots);\
+                \}\
+            \}\
+        \}\
+\
+        function renderSlots(slots) \{\
+            const container = document.getElementById('slots-container');\
+            container.innerHTML = '';\
+            if (slots.length === 0) \{\
+                 container.innerHTML = '<p class="text-gray-500">Nessun orario disponibile al momento.</p>';\
+                 return;\
+            \}\
+            \
+            slots.forEach(slot => \{\
+                const isAvailable = slot.disponibili > 0;\
+                const slotDiv = document.createElement('div');\
+                slotDiv.className = `p-4 border rounded-md flex justify-between items-center $\{isAvailable ? 'bg-white' : 'bg-gray-100 text-gray-400'\}`;\
+                slotDiv.innerHTML = `\
+                    <div>\
+                        <p class="font-semibold">$\{slot.data\} - $\{slot.orario\}</p>\
+                        <p class="text-sm $\{isAvailable ? 'text-gray-600' : 'text-gray-400'\}">Posti disponibili: $\{slot.disponibili\}</p>\
+                    </div>\
+                    <button \
+                        class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed"\
+                        data-slot-id="$\{slot.id\}"\
+                        $\{!isAvailable ? 'disabled' : ''\}>\
+                        Prenota\
+                    </button>\
+                `;\
+                container.appendChild(slotDiv);\
+            \});\
+        \}\
+        \
+        // Event listener per i bottoni "Prenota"\
+        document.getElementById('slots-container').addEventListener('click', async (e) => \{\
+             if (e.target.tagName === 'BUTTON' && e.target.dataset.slotId) \{\
+                const slotId = e.target.dataset.slotId;\
+                const data = await apiCall('makeBooking', \{ username: currentUser.username, slotId: slotId \});\
+                if (data) \{\
+                    loadBookingData(); // Ricarica i dati per mostrare la prenotazione effettuata\
+                \}\
+            \}\
+        \});\
+        \
+        // Annulla prenotazione\
+        document.getElementById('cancel-booking-btn').addEventListener('click', async () => \{\
+            if (confirm("Sei sicuro di voler annullare la tua prenotazione?")) \{\
+                const data = await apiCall('cancelBooking', \{ username: currentUser.username \});\
+                if (data) \{\
+                    loadBookingData(); // Ricarica i dati\
+                \}\
+            \}\
+        \});\
+\
+        // Logout\
+        document.getElementById('logout-btn').addEventListener('click', () => \{\
+            currentUser = null;\
+            sessionStorage.removeItem('currentUser');\
+            showView('login-view');\
+        \});\
+\
+\
+        // --- LINK DI NAVIGAZIONE ---\
+        document.getElementById('show-register-link').addEventListener('click', (e) => \{ e.preventDefault(); showView('register-view'); \});\
+        document.getElementById('show-reset-link').addEventListener('click', (e) => \{ e.preventDefault(); showView('reset-view'); \});\
+        document.getElementById('show-login-link-from-register').addEventListener('click', (e) => \{ e.preventDefault(); showView('login-view'); \});\
+        document.getElementById('show-login-link-from-reset').addEventListener('click', (e) => \{ e.preventDefault(); showView('login-view'); \});\
+\
+        // Controlla se l'utente \'e8 gi\'e0 loggato all'avvio\
+        window.addEventListener('load', () => \{\
+            const savedUser = sessionStorage.getItem('currentUser');\
+            if(savedUser) \{\
+                currentUser = JSON.parse(savedUser);\
+                showDashboard();\
+            \} else \{\
+                showView('login-view');\
+            \}\
+        \});\
+\
+    </script>\
+</body>\
+</html>\
+\
+}
